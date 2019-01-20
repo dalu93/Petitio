@@ -2,14 +2,16 @@ import XCTest
 @testable import Petitio
 
 final class PetitioTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(Petitio().text, "Hello, World!")
+    func testSendRequestAndExpect200() throws {
+        let response = try Petitio.get(
+            at: "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3",
+            parameters: [:]
+        ).wait()
+
+        XCTAssertEqual(response.status, .ok)
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testSendRequestAndExpect200", testSendRequestAndExpect200),
     ]
 }

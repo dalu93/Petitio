@@ -5,16 +5,10 @@ public struct URLEncoder: RequestEncoder {
     public init() {}
 
     public func encode(_ request: URLRequestDescriptor) throws -> HTTPRequest {
-        let generatedQuery = request
-            .parameters
-            .reduce("", { partial, param in
-                let (key, value) = param
-                guard let stringValue = value as? String else {
-                    return partial
-                }
-
-                return partial + key + "=" + stringValue + "&"
-            })
+        var queryElements: [String] = []
+        request.parameters.forEach { args in
+            queryElements.append("\(args.key)=\(args.value)")
+        }
 
         var separatedURL = request
             .url
@@ -29,11 +23,11 @@ public struct URLEncoder: RequestEncoder {
                 newQuery.append("&")
             }
 
-            newQuery.append(generatedQuery)
+            newQuery.append(queryElements.joined(separator: "&"))
             separatedURL[1] = newQuery
         } else if separatedURL.count == 1 {
             // A query does not exist
-            newQuery.append(generatedQuery)
+            newQuery.append(queryElements.joined(separator: "&"))
             separatedURL.append(newQuery)
         } else {
             throw Error.invalidURL
