@@ -1,5 +1,4 @@
 import Foundation
-import HTTP
 
 extension URL {
     func requireScheme() throws -> HTTPScheme {

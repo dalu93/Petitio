@@ -1,5 +1,4 @@
 import XCTest
-import HTTP
 @testable import Petitio
 
 class BodyJSONEncoderTests: XCTestCase {

@@ -1,5 +1,4 @@
 import Foundation
-import HTTP
 
 public struct URLEncoder: RequestEncoder {
     public init() {}

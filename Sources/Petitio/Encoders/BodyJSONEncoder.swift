@@ -1,5 +1,4 @@
 import Foundation
-import HTTP
 
 public struct BodyJSONEncoder: RequestEncoder {
     public init() {}

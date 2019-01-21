@@ -1,5 +1,3 @@
-import HTTP
-
 public enum Petitio {
     public struct Configuration {
         public let timeout: TimeAmount
